@@ -6,7 +6,7 @@
 %
 % Revised version. April, 2009.
 
-% Modified by M.Amintoosi, FUM 2019
+% Modified by M.Amintoosi, FUM 2021
 % clear all;
 clc;
 
@@ -50,14 +50,11 @@ end;
 % =====================================================================
 % Process test images
 % "masir" is transliteration of Persian translation of "path"
-% masir = 'TestImages/';
-% masir = 'Data/Training/';
-% masir = 'D:\Data\BSDS300-images\BSDS300\images\test/';
-% masir = 'TestImages/500px/';
-masir = 'D:/Data/SR_testing_datasets/';
-masirDics = 'D:/Dropbox2019/Teaching/Projects/Other-Universities/Mortazavi/Code/CVPR08-SR/Data/Dics/';
+
+masir = 'D:/Data/SR_testing_datasets/'; % Path to dataset folder
+masirDics = 'Data/Dics/'; % Path to dictionary folder
 dataSets = {'BSDS100','Manga109','Set5','Set14','Urban100'};%,'Set2MAT'};
-masirArticle = 'D:/Dropbox2019/Teaching/Projects/Other-Universities/Mortazavi/Article/InformationSciences2/';
+masirArticle = 'Article/';  % Path to Article, where the output files will be stored
 masirOutput = [masirArticle 'output_x' num2str(zooming) '_p3/'];
 
 methods = {'LR','BC','ID','FD-.2'};%,'FD-.5','FD-.7'};%,'FD-1.2'};%,'FD-1.5'};
@@ -146,13 +143,13 @@ for dsNo = 1:N_dataSets
             switch methodName
                 case 'ID'
 %                     load([masirDics 'Dictionary_ID_Iter15.mat']);
-                    dicFileName = sprintf('Data/Dictionary/Dictionary_x%d_p3.mat', zooming);
+                    dicFileName = sprintf('%s/Dictionary_ID_x%d_p%d.mat', masirDics,zooming,patch_size);
                     load(dicFileName);
                     [hImy] = L1SR(lImy, zooming, patch_size, overlap, Dh, Dl, lambda, regres);
                 case 'FD-.2'
                     nu = .2;
 %                     load([masirDics 'Dictionary_FD.2_Iter15.mat']);
-                    dicFileName = sprintf('Data/Dictionary/Dictionary_FD.%d_iter15_x%d_p3.mat', nu*10,zooming);
+                    dicFileName = sprintf('%s/Dictionary_FD.%d_iter15_x%d_p%d.mat', nu*10,zooming,patch_size);
                     load(dicFileName);
                     [hImy] = L1SR_fd(lImy, zooming, patch_size, overlap, Dh, Dl, lambda, regres,nu);
                 case 'FD-.5'
@@ -205,9 +202,6 @@ for dsNo = 1:N_dataSets
             Results(ii).method(methodNo).ceiq = CEIQ(im2uint8(ReconImCrop),model);
             Results(ii).method(methodNo).niqe = niqe(im2uint8(ReconImCrop));
             
-%             testImCropGray = rgb2gray(testImCrop);
-%             ReconImCropGray = rgb2gray(ReconImCrop);
-%             Results(ii).method(methodNo).vif = vifvec(testImCropGray,ReconImCropGray);
         end
         nnIm = imresize(lowIm, zooming, 'nearest');
         imwrite(uint8(nnIm),[outputDir 'nn.JPG'],'JPG');
@@ -240,10 +234,6 @@ for dsNo = 1:N_dataSets
         nn_niqe = niqe(im2uint8(nnIm));
         bc_niqe = niqe(im2uint8(bcIm));
         
-%         testImGray = rgb2gray(testIm);
-%         nn_vif = vifvec(testImGray,nnIm);
-%         bc_vif = vifvec(testImGray,bcIm);
-
         Results(ii).method(1).outputFileName = [outputDir 'nn.jpg'];
         Results(ii).method(1).rmse = nn_rmse;
         Results(ii).method(1).mse  = nn_mse;
@@ -252,7 +242,6 @@ for dsNo = 1:N_dataSets
         Results(ii).method(1).fsim = nn_fsim;
         Results(ii).method(1).ceiq = nn_ceiq;
         Results(ii).method(1).niqe = nn_niqe;
-%         Results(ii).method(1).vif = nn_vif;
         Results(ii).method(1).runTime = 1e5;
         
         Results(ii).method(2).outputFileName = [outputDir 'bc.jpg'];
@@ -263,7 +252,6 @@ for dsNo = 1:N_dataSets
         Results(ii).method(2).fsim = bc_fsim;
         Results(ii).method(2).ceiq = bc_ceiq;
         Results(ii).method(2).niqe = bc_niqe;
-%         Results(ii).method(2).vif = bc_vif;
         Results(ii).method(2).runTime = 1e5;
     end
     

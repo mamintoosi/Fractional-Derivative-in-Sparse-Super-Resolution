@@ -11,7 +11,7 @@ In addition to MATLAB codes, a few Python script is also provided for creating t
 
 <b> Download Training and Test Images: </b> <br><br>
  The <b>Train</b> dataset is from the Yang's site: 
- <a href="http://www.ifp.illinois.edu/~jyang29/"> http://www.ifp.illinois.edu/~jyang29/ </a> which is provided here, if you download or clone this repository.
+ <a href="http://www.ifp.illinois.edu/~jyang29/"> http://www.ifp.illinois.edu/~jyang29/ </a> which is provided here, if you download or clone this repository (in folder Data/Training).
  
  You can download the dataset sets via the following links:<br>
   <ul>
@@ -23,5 +23,12 @@ In addition to MATLAB codes, a few Python script is also provided for creating t
 </ul> 
 
 <hr>
+## The program
+The core of the program is <a href="http://www.ifp.illinois.edu/~jyang29/"> Yang's </a> MATLAB code for his pioneering paper:<br>
+J.~Yang, J.~Wright, T.~S. Huang, and Y.~Ma, ``Image super-resolution via sparse
+  representation,'' IEEE transactions on image processing, vol.~19,
+  no.~11, pp.~2861--2873, 2010
 
 The main MATLAB file for running the program is: SparseSR_Zooming.m
+
+SparseSR_Zooming.m used for 

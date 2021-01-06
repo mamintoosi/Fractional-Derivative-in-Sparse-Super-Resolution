@@ -23,7 +23,7 @@ In addition to MATLAB codes, a few Python script is also provided for creating t
 </ul> 
 
 <hr>
-## The program
+# The program
 
 The core of the program is <a href="http://www.ifp.illinois.edu/~jyang29/"> Yang's </a> MATLAB code for his pioneering paper:<br>
 J. Yang, J. Wright, T.S. Huang, and Y.Ma, "Image super-resolution via sparse
@@ -32,4 +32,4 @@ J. Yang, J. Wright, T.S. Huang, and Y.Ma, "Image super-resolution via sparse
 
 The main MATLAB file for running the program is: SparseSR_Zooming.m
 
-SparseSR_Zooming.m used for 
+SparseSR_Zooming.m is used for both Train and Test.

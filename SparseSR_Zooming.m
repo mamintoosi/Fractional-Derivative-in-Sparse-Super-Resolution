@@ -51,8 +51,8 @@ end;
 % Process test images
 % "masir" is transliteration of Persian translation of "path"
 
-masir = 'D:/Data/SR_testing_datasets/'; % Path to dataset folder
-masirDics = 'Data/Dics/'; % Path to dictionary folder
+masir = '/Data/Test/'; % Path to dataset folder
+masirDics = 'Data/Dictionary/'; % Path to dictionaries folder
 dataSets = {'BSDS100','Manga109','Set5','Set14','Urban100'};%,'Set2MAT'};
 masirArticle = 'Article/';  % Path to Article, where the output files will be stored
 masirOutput = [masirArticle 'output_x' num2str(zooming) '_p3/'];
@@ -66,8 +66,6 @@ methods = {'LR','BC','ID','FD-.2'};%,'FD-.5','FD-.7'};%,'FD-1.2'};%,'FD-1.5'};
 K=[.01 .03];
 W=fspecial('gaussian', 5, 1.5);%5,1.5
 
-load('CEIQ_model.mat');
-
 nMethods = numel(methods);
 markers = {'b-','c-','r:o','g-.p','m--s','k:<','y:>'};
 
@@ -78,7 +76,7 @@ for dsNo = 1:N_dataSets
     
 %     resultsFileName = sprintf('Results_%s.mat',dataSets{dsNo});
 %     load(resultsFileName,'Results','methods','MSE','SSIM','FSIM','PSNR','TT');
-    clear Results MSE SSIM FSIM PSNR TT NIQE CEIQ
+    clear Results MSE SSIM FSIM PSNR TT 
     
     masirTestImages = sprintf('%s/%s/',masir,curDS);
     % fileList=dir([masir 'tt*.*']);
@@ -149,7 +147,7 @@ for dsNo = 1:N_dataSets
                 case 'FD-.2'
                     nu = .2;
 %                     load([masirDics 'Dictionary_FD.2_Iter15.mat']);
-                    dicFileName = sprintf('%s/Dictionary_FD.%d_iter15_x%d_p%d.mat', nu*10,zooming,patch_size);
+                    dicFileName = sprintf('%s/Dictionary_FD.%d_iter15_x%d_p%d.mat',masirDics, nu*10,zooming,patch_size);
                     load(dicFileName);
                     [hImy] = L1SR_fd(lImy, zooming, patch_size, overlap, Dh, Dl, lambda, regres,nu);
                 case 'FD-.5'
@@ -199,8 +197,6 @@ for dsNo = 1:N_dataSets
 %             Results(ii).method(methodNo).ssim = ssim_index(im2uint8(testImCrop),im2uint8(ReconImCrop),K,W);
             Results(ii).method(methodNo).ssim = ssim(ReconImCrop,testImCrop);
             Results(ii).method(methodNo).fsim = FeatureSIM(im2uint8(testImCrop),im2uint8(ReconImCrop));
-            Results(ii).method(methodNo).ceiq = CEIQ(im2uint8(ReconImCrop),model);
-            Results(ii).method(methodNo).niqe = niqe(im2uint8(ReconImCrop));
             
         end
         nnIm = imresize(lowIm, zooming, 'nearest');
@@ -227,12 +223,6 @@ for dsNo = 1:N_dataSets
         
         nn_fsim = FeatureSIM(im2uint8(testIm),im2uint8(nnIm));
         bc_fsim = FeatureSIM(im2uint8(testIm),im2uint8(bcIm));
-
-        nn_ceiq = CEIQ(im2uint8(nnIm),model);
-        bc_ceiq = CEIQ(im2uint8(bcIm),model);
-
-        nn_niqe = niqe(im2uint8(nnIm));
-        bc_niqe = niqe(im2uint8(bcIm));
         
         Results(ii).method(1).outputFileName = [outputDir 'nn.jpg'];
         Results(ii).method(1).rmse = nn_rmse;
@@ -240,8 +230,6 @@ for dsNo = 1:N_dataSets
         Results(ii).method(1).psnr = nn_psnr;
         Results(ii).method(1).ssim = nn_ssim;
         Results(ii).method(1).fsim = nn_fsim;
-        Results(ii).method(1).ceiq = nn_ceiq;
-        Results(ii).method(1).niqe = nn_niqe;
         Results(ii).method(1).runTime = 1e5;
         
         Results(ii).method(2).outputFileName = [outputDir 'bc.jpg'];
@@ -250,8 +238,6 @@ for dsNo = 1:N_dataSets
         Results(ii).method(2).psnr = bc_psnr;
         Results(ii).method(2).ssim = bc_ssim;
         Results(ii).method(2).fsim = bc_fsim;
-        Results(ii).method(2).ceiq = bc_ceiq;
-        Results(ii).method(2).niqe = bc_niqe;
         Results(ii).method(2).runTime = 1e5;
     end
     
@@ -270,8 +256,6 @@ for dsNo = 1:N_dataSets
     SSIM = MSE;
     TT = MSE;
     FSIM = MSE;
-    CEIQ = MSE;
-    NIQE = MSE;
     RMSE = MSE;
 %     VIF = MSE;
     for ii=1:numel(Results)
@@ -281,9 +265,6 @@ for dsNo = 1:N_dataSets
         for j=1:nMethods, SSIM(ii,j)=Results(ii).method(j).ssim; end
         for j=1:nMethods, FSIM(ii,j)=Results(ii).method(j).fsim; end
         for j=1:nMethods, TT(ii,j)= Results(ii).method(j).runTime; end
-        for j=1:nMethods, CEIQ(ii,j)= Results(ii).method(j).ceiq; end
-        for j=1:nMethods, NIQE(ii,j)= Results(ii).method(j).niqe; end
-%         for j=1:nMethods, VIF(ii,j)= Results(ii).method(j).vif; end
     end
     %%
     figure(11), clf, hold on
@@ -326,9 +307,9 @@ for dsNo = 1:N_dataSets
     %%
 %     % resultsFileName = sprintf('Results_SSR_500px4.mat');
     resultsFileName = sprintf('Results_%s_x%d_p5.mat',curDS,zooming);
-    save(resultsFileName,'Results','methods','MSE','SSIM','PSNR','TT','FSIM','NIQE','CEIQ');
+    save(resultsFileName,'Results','methods','MSE','SSIM','PSNR','TT','FSIM');
     % %%
-%     createLatexImageTables(curDS,masirOutput)
+%     createLatexImageTables(resultsFileName,curDS,masirOutput)
 %     createPlotsData(curDS,masirArticle)
 %     createTableData(curDS,masirOutput)
 end %end for datasets

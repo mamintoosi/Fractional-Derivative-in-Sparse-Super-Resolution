@@ -1,4 +1,4 @@
-function createTableData(curDS,masirOutput,gam)
+function createTableData(resultsFileName,curDS,masirOutput,gam)
 % M.Amintoosi, HSU 2016- FUM 2019
 % Creating Tables in LaTeX
 
@@ -6,7 +6,7 @@ if nargin<3
     gam = 1;
 end
 outputDir = sprintf('%s/%s',masirOutput,curDS);
-resultsFileName = sprintf('Results_%s.mat',curDS);
+%resultsFileName = sprintf('Results_%s.mat',curDS);
 load(resultsFileName,'Results','methods','MSE','SSIM','FSIM','PSNR','TT');
 
 mahaks = {'MSE','PSNR','SSIM','FSIM','TT'};

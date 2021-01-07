@@ -14,7 +14,7 @@ In addition to MATLAB codes, a few Python script is also provided for creating t
  <a href="http://www.ifp.illinois.edu/~jyang29/"> http://www.ifp.illinois.edu/~jyang29/ </a> which is provided here, if you download or clone this repository (in folder Data/Training).
  
  Test datasets in the paper are pupolar datasets in the field of Super-Resolution.
- The following datasets are used in the paper<br>
+ The following datasets are used in the paper:<br>
   <ul>
   <li>BSD100 </li>
   <li>MANGA109  </li>
@@ -23,7 +23,7 @@ In addition to MATLAB codes, a few Python script is also provided for creating t
   <li>URBAN100  </li>
 </ul> 
 which can be downloaded from <a href="https://cvnote.ddlee.cc/2019/09/22/image-super-resolution-datasets" > this site </a>. Note that the Ground truth images should be used as the input of the program. Producing low resolution images and then magnifiying will be done automatically by the program.
-As an example dataset *Set5* is included in folder data/Test/Set5 of this repository.
+As an example dataset **Set5** is included in folder data/Test/Set5 of this repository.
 
 
 <hr>
@@ -38,3 +38,21 @@ J. Yang, J. Wright, T.S. Huang, and Y.Ma, "Image super-resolution via sparse
 The main MATLAB file for running the program is: SparseSR_Zooming.m
 
 SparseSR_Zooming.m is used for both Train and Test.
+
+### Test
+
+The simple approach is using the pre-trained dictionaries, which are in folder Data/Dictionary. Training the dictionary is a time consuming task, hence we provided our trained dictionaries over various parameters, mentioned in the paper. BTW every onr could be use SparseSR_Zooming.m and the Training images for creating his dictionary with his desired parameter settings, or arbitrary training images.
+
+All of the test images are about 300 MB, but you can test only one dataset, by editing the following line in SparseSR_Zooming.m:<br>
+dataSets = {'BSDS100','Manga109','Set5','Set14','Urban100'}
+<br>
+After setting the paths and parameters, you can run the program. 
+
+#### Caution
+
+Running the program with default parameters and for three zooming factors 3,4,5 and on all of the datasets, will produce huge number if images, which require 2.7 Giga byte of storage space. 
+For every test image, 7 images will be produced, in each zooming factor. The default value of zooming factor is 5, which requires about 700 MB of storage space.
+
+Optionally you can un-comment createLatexImageTables, createPlotsData and createTableData for producing some tables demonstrated in the paper.<br>
+Also createSummaryTableDataSets.m and createSummaryTableDataSets_zooming.m can be used for some other results, but these files are need some manual setting for reading the produced results.
+

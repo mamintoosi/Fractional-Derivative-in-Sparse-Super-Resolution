@@ -1,4 +1,4 @@
-function createLatexImageTables(curDS,masirArticle,nRows)
+function createLatexImageTables(resultsFileName,curDS,masirArticle,nRows)
 % M.Amintoosi, HSU 2019
 % Creating image tables in LaTeX
 if nargin<3
@@ -7,7 +7,7 @@ end
 
 masirOutput = [masirArticle 'output/'];
 outputDir = sprintf('%s/%s',masirOutput,curDS);
-resultsFileName = sprintf('Results_%s.mat',curDS);
+%resultsFileName = sprintf('Results_%s.mat',curDS);
 load(resultsFileName,'Results','methods');
 
 % Results(3) = [];

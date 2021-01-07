@@ -1,4 +1,4 @@
-function createPlotsData(curDS,masirArticle,gam)
+function createPlotsData(resultsFileName,curDS,masirArticle,gam)
 % M.Amintoosi, HSU 2016- FUM 2019
 % Creating TikZ Plots in LaTeX
 
@@ -7,7 +7,7 @@ if nargin<3
 end
 masirOutput = [masirArticle 'output/'];
 outputDir = sprintf('%s/%s',masirOutput,curDS);
-resultsFileName = sprintf('Results_%s.mat',curDS);
+%resultsFileName = sprintf('Results_%s.mat',curDS);
 load(resultsFileName,'Results','methods','MSE','SSIM','FSIM','PSNR','TT');
 
 mahaks = {'MSE','PSNR','SSIM','FSIM','TT'};

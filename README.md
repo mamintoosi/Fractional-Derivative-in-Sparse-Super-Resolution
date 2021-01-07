@@ -13,14 +13,18 @@ In addition to MATLAB codes, a few Python script is also provided for creating t
  The <b>Train</b> dataset is from the Yang's site: 
  <a href="http://www.ifp.illinois.edu/~jyang29/"> http://www.ifp.illinois.edu/~jyang29/ </a> which is provided here, if you download or clone this repository (in folder Data/Training).
  
- You can download the dataset sets via the following links:<br>
+ Test datasets in the paper are pupolar datasets in the field of Super-Resolution.
+ The following datasets are used in the paper<br>
   <ul>
-  <li><a href="" >BSD100</a>  </li>
-  <li><a href="" >MANGA109</a>  </li>
-  <li><a href="" >Set5</a>  </li>
-  <li><a href="" >Set14</a>  </li>
-  <li><a href="" >URBAN100</a>  </li>
+  <li>BSD100 </li>
+  <li>MANGA109  </li>
+  <li>Set5  </li>
+  <li>Set14  </li>
+  <li>URBAN100  </li>
 </ul> 
+which can be downloaded from <a href="https://cvnote.ddlee.cc/2019/09/22/image-super-resolution-datasets" > this site </a>. Note that the Ground truth images should be used as the input of the program. Producing low resolution images and then magnifiying will be done automatically by the program.
+As an example dataset *Set5* is included in folder data/Test/Set5 of this repository.
+
 
 <hr>
 

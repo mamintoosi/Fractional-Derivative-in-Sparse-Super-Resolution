@@ -22,8 +22,8 @@ In addition to MATLAB codes, a few Python script is also provided for creating t
   <li>Set14  </li>
   <li>URBAN100  </li>
 </ul> 
-which can be downloaded from <a href="https://cvnote.ddlee.cc/2019/09/22/image-super-resolution-datasets" > this site </a>. Note that the Ground truth images should be used as the input of the program. Producing low resolution images and then magnifiying will be done automatically by the program.
-As an example dataset **Set5** is included in folder data/Test/Set5 of this repository.
+which can be downloaded from <a href="https://cvnote.ddlee.cc/2019/09/22/image-super-resolution-datasets" > this site </a>. Note that the Ground truth images should be used as the input of the program. Producing low resolution images and then magnifying will be done automatically by the program.
+As an example, dataset **Set5** is included in folder data/Test/Set5 of this repository.
 
 
 <hr>
@@ -41,7 +41,7 @@ SparseSR_Zooming.m is used for both Train and Test.
 
 ### Test
 
-The simple approach is using the pre-trained dictionaries, which are in folder Data/Dictionary. Training the dictionary is a time consuming task, hence we provided our trained dictionaries over various parameters, mentioned in the paper. BTW every onr could be use SparseSR_Zooming.m and the Training images for creating his dictionary with his desired parameter settings, or arbitrary training images.
+The simple approach is using the pre-trained dictionaries, which are in folder Data/Dictionary. Training the dictionary is a time-consuming task, hence we provided our trained dictionaries over various parameters, mentioned in the paper. BTW every one could be use SparseSR_Zooming.m and the Training images for creating his dictionary with his desired parameter settings, or arbitrary training images.
 
 All of the test images are about 300 MB, but you can test only one dataset, by editing the following line in SparseSR_Zooming.m:<br>
 dataSets = {'BSDS100','Manga109','Set5','Set14','Urban100'}
@@ -62,4 +62,8 @@ For training the program using arbitrary images, after setting the related Paths
 When skip_smp_training=false, 50000 small patches from train images are selected and corresponding low and highresolution of the patches saved in Xh, Xl. After that, if skip_dictionary_training=false, these variables will be used to coupled_dic_train() for creating the appropriate dictionary. 
 <br>
 The resulting dictionary will be saved as Data/Dictionary/Dictionary.mat. 
-Somw previous trained dictionaries were renamed manually for testing purposes.
+Some previous trained dictionaries were renamed manually for testing purposes.
+
+== Image Tables
+
+The aforementioned MATLAB files produce LaTeX tables and recinstructed images of various methods. But for producing images such as Figure 7 in the paper (the top Zebra image), which a portion of images is enlarged, a python script is prepared: makeImagetable.ipynb. This jupyter notebook can be run after running the MATLAB codes on test images.

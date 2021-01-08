@@ -9,6 +9,8 @@ In addition to MATLAB codes, a few Python script is also provided for creating t
 <img src="images/FD-in-SR.jpg" />
 <hr>
 
+## Dataset 
+
 <b> Download Training and Test Images: </b> <br><br>
  The <b>Train</b> dataset is from the Yang's site: 
  <a href="http://www.ifp.illinois.edu/~jyang29/"> http://www.ifp.illinois.edu/~jyang29/ </a> which is provided here, if you download or clone this repository (in folder Data/Training).
@@ -41,7 +43,7 @@ The main MATLAB file for running the program is: *SparseSR_Zooming.m*
 
 ### Test
 
-The simple approach is using the pre-trained dictionaries, which are in folder *Data/Dictionary*. Training the dictionary is a time-consuming task, hence we provided our trained dictionaries over various parameters, mentioned in the paper. BTW every one could be use SparseSR_Zooming.m and the Training images for creating his dictionary with his desired parameter settings, or arbitrary training images.
+The simple approach is using the pre-trained dictionaries, which are in folder *Data/Dictionary*. Training the dictionary is a time-consuming task, hence we provided our trained dictionaries over various parameters, mentioned in the paper. BTW every one could be use *SparseSR_Zooming.m* and the Training images for creating his dictionary with his desired parameter settings, or arbitrary training images.
 
 All of the test images are about 300 MB, but you can test only one dataset, by editing the following line in SparseSR_Zooming.m:<br>
 *dataSets = {'BSDS100','Manga109','Set5','Set14','Urban100'}*
@@ -53,7 +55,7 @@ After setting the paths and parameters, you can run the program.
 Running the program with default parameters and for three zooming factors 3,4,5 and on all of the datasets, will produce huge number if images, which require <b>2.7 Giga byte</b> of storage space. 
 For every test image, 7 images will be produced, in each zooming factor. The default value of zooming factor is 5, which requires about 700 MB of storage space.
 
-Optionally you can un-comment createLatexImageTables, createPlotsData and createTableData for producing some tables demonstrated in the paper.<br>
+Optionally you can un-comment *createLatexImageTables*, *createPlotsData* and *createTableData* for producing some tables demonstrated in the paper.<br>
 Also *createSummaryTableDataSets.m* and *createSummaryTableDataSets_zooming.m* can be used for some other results, but these files are need some manual setting for reading the produced results.
 
 ### Training
@@ -61,7 +63,7 @@ Also *createSummaryTableDataSets.m* and *createSummaryTableDataSets_zooming.m* c
 For training the program using arbitrary images, after setting the related Paths, you should set *skip_smp_training* and *skip_dictionary_training* to false. The default values of these variables are true,  which is used for testing the program with pre-trained dictionaries.
 When *skip_smp_training=false*, 50000 small patches from train images are selected and corresponding low and highresolution of the patches saved in *Xh, Xl*. After that, if *skip_dictionary_training=false*, these variables will be used to *coupled_dic_train()* for creating the appropriate dictionary. 
 <br>
-The resulting dictionary will be saved as Data/Dictionary/Dictionary.mat. 
+The resulting dictionary will be saved as *Data/Dictionary/Dictionary.mat*. 
 Some previous trained dictionaries were renamed manually for testing purposes.
 
 #### Image Tables

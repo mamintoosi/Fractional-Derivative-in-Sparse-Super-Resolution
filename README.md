@@ -56,3 +56,10 @@ For every test image, 7 images will be produced, in each zooming factor. The def
 Optionally you can un-comment createLatexImageTables, createPlotsData and createTableData for producing some tables demonstrated in the paper.<br>
 Also createSummaryTableDataSets.m and createSummaryTableDataSets_zooming.m can be used for some other results, but these files are need some manual setting for reading the produced results.
 
+### Training
+
+For training the program using arbitrary images, after setting the related Paths, you should set *skip_smp_training* and *skip_dictionary_training* to false. The default values of these variables are true,  which is used for testing the program with pre-trained dictionaries.
+When skip_smp_training=false, 50000 small patches from train images are selected and corresponding low and highresolution of the patches saved in Xh, Xl. After that, if skip_dictionary_training=false, these variables will be used to coupled_dic_train() for creating the appropriate dictionary. 
+<br>
+The resulting dictionary will be saved as Data/Dictionary/Dictionary.mat. 
+Somw previous trained dictionaries were renamed manually for testing purposes.

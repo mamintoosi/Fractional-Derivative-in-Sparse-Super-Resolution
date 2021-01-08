@@ -27,7 +27,6 @@ In addition to MATLAB codes, a few Python script is also provided for creating t
 which can be downloaded from <a href="https://cvnote.ddlee.cc/2019/09/22/image-super-resolution-datasets" > this site </a>. Note that the Ground truth images should be used as the input of the program. Producing low resolution images and then magnifying will be done automatically by the program.
 As an example, dataset *Set5* is included in folder *data/Test/Set5* of this repository.
 
-
 <hr>
 
 ## The program
@@ -68,4 +67,4 @@ Some previous trained dictionaries were renamed manually for testing purposes.
 
 #### Image Tables
 
-The aforementioned MATLAB files produce 8LaTeX tables and recinstructed images of various methods. But for producing images such as Figure 7 in the paper (the top Zebra image), which a portion of images is enlarged, a python script is prepared: *makeImagetable.ipynb*. This jupyter notebook can be run after running the MATLAB codes on test images.
+The aforementioned MATLAB files produce LaTeX tables and recinstructed images of various methods. But for producing images such as Figure 7 in the paper (the top Zebra image), in which a portion of the images is enlarged, a python script is prepared: *makeImagetable.ipynb*. This jupyter notebook can be run after running the MATLAB codes on test images.

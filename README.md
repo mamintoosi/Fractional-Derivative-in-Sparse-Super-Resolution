@@ -45,7 +45,7 @@ The main MATLAB file for running the program is: *SparseSR_Zooming.m*
 
 The simple approach is using the pre-trained dictionaries, which are in folder *Data/Dictionary*. Training the dictionary is a time-consuming task, hence we provided our trained dictionaries over various parameters, mentioned in the paper. BTW every one could be use *SparseSR_Zooming.m* and the Training images for creating his dictionary with his desired parameter settings, or arbitrary training images.
 
-All of the test images are about 300 MB, but you can test only one dataset, by editing the following line in SparseSR_Zooming.m:<br>
+All of the test images are about 300 MB, but you can test only one dataset, by editing the following line in *SparseSR_Zooming.m*:<br>
 *dataSets = {'BSDS100','Manga109','Set5','Set14','Urban100'}*
 <br>
 After setting the paths and parameters, you can run the program. 
@@ -61,7 +61,7 @@ Also *createSummaryTableDataSets.m* and *createSummaryTableDataSets_zooming.m* c
 ### Training
 
 For training the program using arbitrary images, after setting the related Paths, you should set *skip_smp_training* and *skip_dictionary_training* to false. The default values of these variables are true,  which is used for testing the program with pre-trained dictionaries.
-When *skip_smp_training=false*, 50000 small patches from train images are selected and corresponding low and highresolution of the patches saved in *Xh, Xl*. After that, if *skip_dictionary_training=false*, these variables will be used to *coupled_dic_train()* for creating the appropriate dictionary. 
+When *skip_smp_training=false*, andom 50000 small patches from train images are selected and corresponding low and high-resolutions of the patches saved in *Xh, Xl*. After that, if *skip_dictionary_training=false*, these variables will be used to *coupled_dic_train()* for creating the appropriate dictionary. 
 <br>
 The resulting dictionary will be saved as *Data/Dictionary/Dictionary.mat*. 
 Some previous trained dictionaries were renamed manually for testing purposes.

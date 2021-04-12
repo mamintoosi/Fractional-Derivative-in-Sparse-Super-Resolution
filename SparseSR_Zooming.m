@@ -44,7 +44,7 @@ if ~skip_dictionary_training,
     [Dh, Dl] = coupled_dic_train(Xh, Xl, codebook_size, lambda);
     save('Data/Dictionary/Dictionary.mat', 'Dh', 'Dl');
 else
-    load('Data/Dictionary/Dictionary.mat');
+    load('Data/Dictionary/Dictionary_ID_iter15_x3_p3.mat');
 end;
 
 % =====================================================================
@@ -53,7 +53,7 @@ end;
 
 masir = '/Data/Test/'; % Path to dataset folder
 masirDics = 'Data/Dictionary/'; % Path to dictionaries folder
-dataSets = {'BSDS100','Manga109','Set5','Set14','Urban100'};%,'Set2MAT'};
+dataSets = {'Set5','BSDS100','Manga109','Set14','Urban100'};%,'Set2MAT'};
 masirArticle = 'Article/';  % Path to Article, where the output files will be stored
 masirOutput = [masirArticle 'output_x' num2str(zooming) '_p3/'];
 

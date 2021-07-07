@@ -278,7 +278,7 @@ for dsNo = 1:N_dataSets
     tstr = mat_printf('MSE (Avg): ',methods,mean(MSE));
     title(tstr)
     hold off
-    print('-dpng',gcf,'doc/mse.png');
+    print('-dpng',gcf,'Article/mse.png');
     
     figure(12), clf, hold on
     for j=1:nMethods
@@ -288,7 +288,7 @@ for dsNo = 1:N_dataSets
     tstr = mat_printf('SSIM (Avg): ',methods,mean(SSIM));
     title(tstr)
     hold off
-    print('-dpng',gcf,'doc/ssim.png');
+    print('-dpng',gcf,'Article/ssim.png');
     
     figure(13), clf, hold on
     for j=1:nMethods
@@ -298,7 +298,7 @@ for dsNo = 1:N_dataSets
     tstr = mat_printf('PSNR (Avg): ',methods,mean(PSNR));
     title(tstr)
     hold off
-    print('-dpng',gcf,'doc/psnr.png');
+    print('-dpng',gcf,'Article/psnr.png');
     % figure(13), plot(TT);   legend({'MP','BN','BNSWZ'})
     sprintf('%3d   ',1:nMethods)
     methods

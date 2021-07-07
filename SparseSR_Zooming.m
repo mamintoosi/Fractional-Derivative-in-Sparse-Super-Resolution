@@ -51,9 +51,11 @@ end;
 % Process test images
 % "masir" is transliteration of Persian translation of "path"
 
-masir = '/Data/Test/'; % Path to dataset folder
+masir = 'Data/Test'; % Path to dataset folder
 masirDics = 'Data/Dictionary/'; % Path to dictionaries folder
-dataSets = {'Set5','BSDS100','Manga109','Set14','Urban100'};%,'Set2MAT'};
+
+% Add other dataSets after downloading them
+dataSets = {'Set5'}%,'BSDS100','Manga109','Set14','Urban100'};
 masirArticle = 'Article/';  % Path to Article, where the output files will be stored
 masirOutput = [masirArticle 'output_x' num2str(zooming) '_p3/'];
 
@@ -141,7 +143,7 @@ for dsNo = 1:N_dataSets
             switch methodName
                 case 'ID'
 %                     load([masirDics 'Dictionary_ID_Iter15.mat']);
-                    dicFileName = sprintf('%s/Dictionary_ID_x%d_p%d.mat', masirDics,zooming,patch_size);
+                    dicFileName = sprintf('%s/Dictionary_ID_iter15_x%d_p%d.mat', masirDics,zooming,patch_size);
                     load(dicFileName);
                     [hImy] = L1SR(lImy, zooming, patch_size, overlap, Dh, Dl, lambda, regres);
                 case 'FD-.2'

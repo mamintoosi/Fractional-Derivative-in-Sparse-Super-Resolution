@@ -22,7 +22,7 @@ overlap = 1; % overlap between adjacent patches
 lambda = 0.1; % sparsity parameter
 zooming = 5; % zooming factor, if you change this, the dictionary needs to be retrained.
 
-tr_dir = 'Data/training'; % path for training images
+tr_dir = '../Data/training'; % path for training images
 skip_smp_training = true; % sample training patches
 skip_dictionary_training = true; % train the coupled dictionary
 num_patch = 50000; % number of patches to sample as the dictionary
@@ -35,28 +35,28 @@ regres = 'L1'; % 'L1' or 'L2', use the sparse representation directly, or use th
 if ~skip_smp_training,
     disp('Sampling image patches...');
     [Xh, Xl] = rnd_smp_dictionary(tr_dir, patch_size, zooming, num_patch);
-    save('Data/Dictionary/smp_patches.mat', 'Xh', 'Xl');
+    save('../Data/Dictionary/smp_patches.mat', 'Xh', 'Xl');
     skip_dictionary_training = false;
-end;
+end
 
 if ~skip_dictionary_training,
-    load('Data/Dictionary/smp_patches.mat');
+    load('../Data/Dictionary/smp_patches.mat');
     [Dh, Dl] = coupled_dic_train(Xh, Xl, codebook_size, lambda);
-    save('Data/Dictionary/Dictionary.mat', 'Dh', 'Dl');
+    save('../Data/Dictionary/Dictionary.mat', 'Dh', 'Dl');
 else
-    load('Data/Dictionary/Dictionary_ID_iter15_x3_p3.mat');
-end;
+    load('../Data/Dictionary/Dictionary_ID_iter15_x3_p3.mat');
+end
 
 % =====================================================================
 % Process test images
 % "masir" is transliteration of Persian translation of "path"
 
-masir = 'Data/Test'; % Path to dataset folder
-masirDics = 'Data/Dictionary/'; % Path to dictionaries folder
+masir = '../Data/Test'; % Path to dataset folder
+masirDics = '../Data/Dictionary/'; % Path to dictionaries folder
 
 % Add other dataSets after downloading them
-dataSets = {'Set5'}%,'BSDS100','Manga109','Set14','Urban100'};
-masirArticle = 'Article/';  % Path to Article, where the output files will be stored
+dataSets = {'Set5','Set14'}%,'BSDS100','Manga109','Urban100'};
+masirArticle = 'output/';  % Path to Article, where the output files will be stored
 masirOutput = [masirArticle 'output_x' num2str(zooming) '_p3/'];
 
 methods = {'LR','BC','ID','FD-.2'};%,'FD-.5','FD-.7'};%,'FD-1.2'};%,'FD-1.5'};
@@ -85,6 +85,7 @@ for dsNo = 1:N_dataSets
     fileList=dir([masirTestImages '*.png']);
     % fileList(1:2) = []; % Removing '.' and '..'
     for ii=1 :  numel(fileList)
+%         if ii>3, break, end
         sprintf('Processing Image %d of %d ...',ii,numel(fileList))
         fileName = fileList(ii).name(1:end-4)
         outputDir = sprintf('%s/%s/%s',masirOutput,curDS,fileName);
@@ -278,7 +279,11 @@ for dsNo = 1:N_dataSets
     tstr = mat_printf('MSE (Avg): ',methods,mean(MSE));
     title(tstr)
     hold off
-    print('-dpng',gcf,'Article/mse.png');
+
+    outputDir = sprintf('%s/%s',masirOutput,curDS);
+
+    output_file_name = sprintf('%s/mse.png',outputDir);
+    print('-dpng',gcf,output_file_name);
     
     figure(12), clf, hold on
     for j=1:nMethods
@@ -288,7 +293,9 @@ for dsNo = 1:N_dataSets
     tstr = mat_printf('SSIM (Avg): ',methods,mean(SSIM));
     title(tstr)
     hold off
-    print('-dpng',gcf,'Article/ssim.png');
+
+    output_file_name = sprintf('%s/ssim.png',outputDir);
+    print('-dpng',gcf,output_file_name);
     
     figure(13), clf, hold on
     for j=1:nMethods
@@ -298,7 +305,9 @@ for dsNo = 1:N_dataSets
     tstr = mat_printf('PSNR (Avg): ',methods,mean(PSNR));
     title(tstr)
     hold off
-    print('-dpng',gcf,'Article/psnr.png');
+    output_file_name = sprintf('%s/psnr.png',outputDir);
+    print('-dpng',gcf,output_file_name);
+
     % figure(13), plot(TT);   legend({'MP','BN','BNSWZ'})
     sprintf('%3d   ',1:nMethods)
     methods
@@ -307,8 +316,7 @@ for dsNo = 1:N_dataSets
     sprintf('%5.3f ',mean(PSNR))
     sprintf('%5.3f ',mean(FSIM))
     %%
-%     % resultsFileName = sprintf('Results_SSR_500px4.mat');
-    resultsFileName = sprintf('Results_%s_x%d_p5.mat',curDS,zooming);
+    resultsFileName = sprintf('%s/Results_p3.mat',outputDir);
     save(resultsFileName,'Results','methods','MSE','SSIM','PSNR','TT','FSIM');
     % %%
 %     createLatexImageTables(resultsFileName,curDS,masirOutput)

@@ -4,6 +4,7 @@ Fractional Derivative in Sparse Super Resolution
  [![GitHub forks](https://img.shields.io/github/forks/mamintoosi/Fractional-Derivative-in-Sparse-Super-Resolution)](https://github.com/mamintoosi/Fractional-Derivative-in-Sparse-Super-Resolution/network)
 [![GitHub issues](https://img.shields.io/github/issues/mamintoosi/Fractional-Derivative-in-Sparse-Super-Resolution)](https://github.com/mamintoosi/Fractional-Derivative-in-Sparse-Super-Resolution/issues)
 [![GitHub license](https://img.shields.io/github/license/mamintoosi/Fractional-Derivative-in-Sparse-Super-Resolution)](https://github.com/mamintoosi/Fractional-Derivative-in-Sparse-Super-Resolution/blob/main/LICENSE)
+[PDF](https://www.dropbox.com/s/fhs8nd0zedszz4r/1401-Fractional%20derivative%20approach%20to%20sparse%20super-resolution.pdf?dl=1)
 
  
 <br>
